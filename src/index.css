@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+.font-montserrat{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --color-primary: #43A047;
+  --color-secondary: white;
+  --color-accent: #FF7043;
+}
+
+.bg-primary {
+  background-color: var(--color-primary) !important;
+  transition: background-color 0.3s ease;
+}
+
+.bg-primary:hover {
+  background-color: #388e3c !important; /* slightly darker green on hover */
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+  transition: color 0.3s ease;
+}
+
+.text-primary:hover {
+  color: #388e3c !important; /* darker green on hover */
+}
+
