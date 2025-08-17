@@ -13,23 +13,24 @@ const Newsletter = () => {
     }
 
     try {
-      // Get existing subscribers
+  
       const storedEmails =
         JSON.parse(localStorage.getItem("newsletterSubs")) || [];
 
-      // Prevent duplicate subscription
+
       if (storedEmails.includes(email)) {
         toast.warning("You are already subscribed.");
         return;
       }
 
-      // Save new email
+
       storedEmails.push(email);
       localStorage.setItem("newsletterSubs", JSON.stringify(storedEmails));
 
-      toast.success("✅ Subscribed successfully!");
+      toast.success("Subscribed successfully!");
+
       setEmail("");
-      
+      e.target.reset();
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Try again later.");
