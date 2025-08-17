@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -13,16 +14,13 @@ const Newsletter = () => {
     }
 
     try {
-  
       const storedEmails =
         JSON.parse(localStorage.getItem("newsletterSubs")) || [];
-
 
       if (storedEmails.includes(email)) {
         toast.warning("You are already subscribed.");
         return;
       }
-
 
       storedEmails.push(email);
       localStorage.setItem("newsletterSubs", JSON.stringify(storedEmails));
@@ -38,37 +36,59 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-green-50 py-12 px-6">
+    <motion.section
+      className="bg-green-50 py-12 px-6"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
+        <motion.h2
+          className="text-3xl font-bold text-gray-800 mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
           Stay Updated with <span className="text-green-700">Bazaroid</span>
-        </h2>
-        <p className="text-gray-600 mb-6">
+        </motion.h2>
+
+        <motion.p
+          className="text-gray-600 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
           Subscribe to get the latest{" "}
           <span className="font-medium">price updates, exclusive deals,</span>{" "}
           and market trends delivered straight to your inbox.
-        </p>
+        </motion.p>
 
-        <form
+        <motion.form
           onSubmit={handleSubscribe}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <input
+          <motion.input
             type="email"
             placeholder="Enter your email"
             className="w-full sm:w-2/3 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            whileFocus={{ scale: 1.02 }}
           />
-          <button
+          <motion.button
             type="submit"
             className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow-sm cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Subscribe
-          </button>
-        </form>
+          </motion.button>
+        </motion.form>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
