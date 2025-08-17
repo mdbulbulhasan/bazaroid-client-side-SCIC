@@ -12,7 +12,7 @@ const BeAMerchant = () => {
 
   return (
     <section className="bg-green-50 py-12">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center px-4 gap-10">
+      <div className="flex flex-col md:flex-row items-center px-4 gap-10">
         {/* Left Side Image */}
         <motion.img
           src={merchantImg}
