@@ -4,6 +4,7 @@ import BeAMerchant from '../BeAMerchant/BeAMerchant';
 import Advertisement from '../Advertisement/Advertisement';
 import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
 import ProductSection from '../Products/ProductSection/ProductSection';
+import Newsletter from '../NewsLetter/NewsLetter';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <BeAMerchant></BeAMerchant>
             <Advertisement></Advertisement>          
             <WhyChooseUs></WhyChooseUs>
+            <Newsletter></Newsletter>
         </div>
     );
 };
