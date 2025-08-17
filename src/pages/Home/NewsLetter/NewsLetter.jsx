@@ -1,26 +1,38 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { toast } from "react-toastify";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(null);
 
-  const handleSubscribe = async (e) => {
+  const handleSubscribe = (e) => {
     e.preventDefault();
 
-    if (!email) {
-      setStatus("Please enter a valid email.");
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Please enter a valid email.");
       return;
     }
 
     try {
-      // 🔥 Replace with your backend subscription API
-      await axios.post("/api/newsletter/subscribe", { email });
-      setStatus("✅ Subscribed successfully!");
+      // Get existing subscribers
+      const storedEmails =
+        JSON.parse(localStorage.getItem("newsletterSubs")) || [];
+
+      // Prevent duplicate subscription
+      if (storedEmails.includes(email)) {
+        toast.warning("You are already subscribed.");
+        return;
+      }
+
+      // Save new email
+      storedEmails.push(email);
+      localStorage.setItem("newsletterSubs", JSON.stringify(storedEmails));
+
+      toast.success("✅ Subscribed successfully!");
       setEmail("");
+      
     } catch (error) {
       console.error(error);
-      setStatus("❌ Something went wrong. Try again later.");
+      toast.error("Something went wrong. Try again later.");
     }
   };
 
@@ -54,16 +66,6 @@ const Newsletter = () => {
             Subscribe
           </button>
         </form>
-
-        {status && (
-          <p
-            className={`mt-4 text-sm ${
-              status.startsWith("✅") ? "text-green-600" : "text-red-500"
-            }`}
-          >
-            {status}
-          </p>
-        )}
       </div>
     </section>
   );
